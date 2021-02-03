@@ -46,3 +46,23 @@ exports.FindUserWithTasks = async (req, res) => {
       res.status(400).send({ Success: false, message: err.message });
     });
 };
+
+exports.Paging = async (req, res) => {
+  const { page , limit } = req.query;
+  try {
+    const todo = await Todo.find()
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+
+    const count = await Todo.countDocuments();
+
+    res.json({
+      todo,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
+  } catch (err) {
+    res.status(400).send({ Success: false, message: err.message });
+  }
+};

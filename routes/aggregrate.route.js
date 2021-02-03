@@ -5,7 +5,7 @@ module.exports = (app) => {
 
     app.get('/findUserWithTasks',Aggregrate.FindUserWithTasks);
 
-    //app.get('/fetch/:text',CSV.FindConditional);
+    app.get('/fetchByPaging',Aggregrate.Paging);
 
     //app.post('/adduser',User.AddUser);
 }
